@@ -1,0 +1,42 @@
+{{>header}}
+
+{{log details}}
+    <div class="continer-fluid">
+        <div class="row">
+            <div class="col-sm-2 offset-sm-10 "><a href="/add" class="btn btn-primary">Add</a></div>
+        </div><br>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Emails</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#if details}}
+                {{#each details}}
+                <tr>
+                <th scope="row">{{#each this.emaiId}}{{this}}<br>{{/each}}</th>
+                <td>{{this.subject}}</td>
+                <td>{{this.time}}</td>
+                <td>{{#ifCond  this.status 1}}<span class="text-success">Send</span>{{else}}<span class="text-primary">Scheduled</span>{{/ifCond}}</td>
+                <td><a href="/edit/{{this._id}}" class="btn btn-success text-light" id="updatePage">Update</a>
+                <form method='post' action='/delete/{{this._id}}' class="delete-form">
+                    <input type="submit" class="btn btn-danger text-light" value="Delete"/>
+                </form>
+                </tr>
+                {{/each}}
+                {{else}}
+                <tr>
+                    <td colspan="5" class="text-center"><h3>Your data will be shown here when you schedule mails...</h3></td>
+                </tr>
+                    
+                {{/if}}
+            </tbody>
+        </table>
+    </div>
+
+{{>footer}}
